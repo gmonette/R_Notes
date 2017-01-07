@@ -7,12 +7,14 @@
 #'     html_document:
 #'         toc: true
 #'         toc_depth: 6
+#'         keep_md: true
 #' ---
 #' 
 #' Output produced on: `r format(Sys.time(), '%B %d, %Y at %H:%M')`
 #'
 #' <!--
-#' Incorporate Warwick Exercises
+#' Incorporate Warwick Exercises: 
+#'       Part 4: Harder functions and Part 5: Data frame, list, array and time series
 #' -->
 #' 
 #' # Introduction
@@ -24,8 +26,9 @@
 install.packages('haven')
 install.packages('readxl')
 install.packages('rgl')
-install_github('gmonette/spida2')
-install_github('gmonette/p3d')
+install.packages('devtools')
+devtools::install_github('gmonette/spida2')
+devtools::install_github('gmonette/p3d')
 #'
 #' # 1. Data input and output
 #' 
@@ -42,7 +45,7 @@ dd <- read_excel('file.xlsx', sheet = 2, na = 'NA')
 dd <- as.data.frame(as.list(dd))
 #' The last line is important if you want a data frame in the usual format -- e.g  with factors
 #' for categorical variables. 
-#' The file created by 'read_excel' has class 'tibble' which is not used outside the
+#' The file created by '<tt>read_excel</tt>' has class 'tibble' which is not used outside the
 #' Hadleyverse.
 #' 
 #' ### 1.1.A Read sheets from an SPSS file
@@ -127,16 +130,17 @@ summary(fit)
 #'     
 #' 5. [Warwick] Use the function 'paste' to create the following character vectors of length 30:
 #'
-#'     a. ("label 1", "label 2", ... , "label 30"). Note that there is a single space
-#'        between 'label' and the number following.
-#'     b. ("fn1", "fn2", ..., "fn30"). In this case there is no space.
+#'     a. <tt>("label 1", "label 2", ... , "label 30")</tt>. 
+#'        Note that there is a single space
+#'        between <tt>label</tt> and the number following.
+#'     b. <tt>("fn1", "fn2", ..., "fn30")</tt>. In this case there is no space.
 #'     
 #' 6. [Warwick] Execute the following lines which create two vectors of random integers which 
 #'    are chosen with replacement from the integers 0, 1, ..., 999. Both vectors have length 250.
 #'    <pre><code> set.seed(50)
 #'      xVec <- sample(0:999, 250, replace = T)
 #'      yVec <- sample(0:999, 250, replace = T)</code></pre>  
-#'    Suppose $\mathbf{x} = (x_1, x_2, ..., x_n)$ denotes the vector 'xVec' and similarly
+#'    Suppose $\mathbf{x} = (x_1, x_2, ..., x_n)$ denotes the vector <tt>>xVec</tt> and similarly
 #'    for $\mathbf{y}$. 
 #'    
 #'      a. Create the vector $(y_2 - x_1, ..., y_n - x_{n-1})$
@@ -144,23 +148,23 @@ summary(fit)
 #'      c. Create the vector $(x_1 + 2x_2 - x_3, x_2 + 2 x_3 - x_4, ..., x_{n-1} + 2x_{n-1} - x_n)$
 #'      d. Calculate $\sum_{i=1}^{n-1}\left.\frac{e^{-x_{i+1}}}{x_i + 10}\right.$
 #'      
-#' 7. [Warwick] This question uses the vectors 'xVec' and 'yVec' created in the previous question and the 
-#'    function 'sort', 'order', 'mean', 'sqrt', 'sum' and 'abs'.
+#' 7. [Warwick] This question uses the vectors <tt>xVec</tt> and <tt>yVec</tt> created in the previous question and the 
+#'    function '<tt>sort</tt>', '<tt>order</tt>', '<tt>mean</tt>', '<tt>sqrt</tt>', '<tt>sum</tt>' and '<tt>abs</tt>'.
 #'    
-#'      a. Pick you the value in 'yVec' which are > 100.
-#'      b. What are the index positions in 'yVec' of the values which are > 600?
-#'      c. What are the values in 'xVec' which correspond to the values in 'yVec' which are >600?
+#'      a. Pick you the value in '<tt>yVec</tt>' which are > 100.
+#'      b. What are the index positions in '<tt>yVec</tt>' of the values which are > 600?
+#'      c. What are the values in '<tt>xVec</tt>' which correspond to the values in '<tt>yVec</tt>' which are >600?
 #'      d. Create the vector 
 #'         $\left(
 #'         \left|x_1-\bar{\mathbf{x}}\right|^{1/2},
 #'         \left|x_2-\bar{\mathbf{x}}\right|^{1/2},...,
 #'         \left|x_n-\bar{\mathbf{x}}\right|^{1/2}\right)$      
-#'      e. How many values in 'yVec' are within 200 of the maximum value of the terms in 'yVec'?
-#'      f. Sort the numbers in the vector 'xVec' in the order of increasing values in 'yVec'.
-#'      g. How many numbers in 'xVec' are divisible by 2?
-#'      h. Pick out the elements in 'yVec' at index positions 1,4,7,10,13,...
+#'      e. How many values in '<tt>yVec</tt>' are within 200 of the maximum value of the terms in '<tt>yVec</tt>'?
+#'      f. Sort the numbers in the vector '<tt>xVec</tt>' in the order of increasing values in '<tt>yVec</tt>'.
+#'      g. How many numbers in '<tt>xVec</tt>' are divisible by 2?
+#'      h. Pick out the elements in '<tt>yVec</tt>' at index positions 1,4,7,10,13,...
 #'      
-#' 8. [Warwick] By using the function 'cumprod' or otherwise, calculate 
+#' 8. [Warwick] By using the function '<tt>cumprod</tt>' or otherwise, calculate 
 #'    $$ 1 + \frac{2}{3} +\frac{2}{3}\frac{4}{5} + \frac{2}{3}\frac{4}{5}\frac{6}{7}+...+\frac{2}{3}\frac{4}{5}...\frac{38}{39}$$
 #'
 #' # 3 Statistical and mathematical functions
@@ -183,16 +187,16 @@ summary(fit)
 #'    
 #' 2. Create the following matrix $\mathbf{B}$ with 15 rows:
 #'    $$\mathbf{A}= \begin{bmatrix} 10 & -10 & 10 \\ 10 & -10 & 10 \\ \vdots & \vdots & \vdots \\10 & -10 & 10\end{bmatrix}$$
-#'    Calculate the $3 \times 3$ matrix $\mathbf{B}^T\mathbf{B}$. Consider: ?crossprod
+#'    Calculate the $3 \times 3$ matrix $\mathbf{B}^T\mathbf{B}$. Consider: <tt>?crossprod</tt>
 #'    
-#' 3. Create a $6 \times 6$ matrix 'matE' with every entry equal to 0. Check what the functions
-#'    'row' and 'col' return when applied to 'matE'. Hence create the $6 \times 6$ matrix:
+#' 3. Create a $6 \times 6$ matrix '<tt>matE</tt>' with every entry equal to 0. Check what the functions
+#'    '<tt>row</tt>' and '<tt>col</tt>' return when applied to '<tt>matE</tt>'. Hence create the $6 \times 6$ matrix:
 #'    $$\begin{bmatrix} 
 #'    0 & 1 & 0 & 0 & 0 & 0 \\ 1 & 0 & 1 & 0 & 0 & 0 \\
 #'    0 & 1 & 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 & 1 & 0 \\
 #'    0 & 0 & 0 & 1 & 0 & 1 \\ 0 & 0 & 0 & 0 & 1 & 0 \end{bmatrix}$$ 
 #' 
-#' 4. Look at '?outer'. Hence create the following patterned matrix:
+#' 4. Look at <tt>?outer</tt>. Hence create the following patterned matrix:
 #'    $$\begin{bmatrix} 
 #'    0 & 1 & 2 & 3 & 4 & 5 \\ 1 & 2 & 3 & 4 & 5 & 6 \\
 #'    2 & 3 & 4 & 5 & 6 & 7 \\ 3 & 4 & 5 & 6 & 7 & 8 \\
@@ -258,22 +262,22 @@ summary(fit)
 #' 
 #' 1.
 #' 
-#'     a. Write functions 'tmpFn1' and 'tmpFn2' such that if 'xVec' is the vector
+#'     a. Write functions '<tt>tmpFn1</tt>' and '<tt>tmpFn2</tt>' such that if '<tt>xVec</tt>' is the vector
 #'        $(x_1, x_2, ..., x_n)$,
-#'        then 'tmpFn1(xVec)' returns the vector
+#'        then '<tt>tmpFn1(xVec)</tt>' returns the vector
 #'        $(x_1,x_2^2,...,x_n^n)$ 
-#'        and 'tmpFn2(xVec)' returns the vector
+#'        and '<tt>tmpFn2(xVec)</tt>' returns the vector
 #'        $\left({x_1,\frac{x_2^2}{2},...,\frac{x_n^n}{n}}\right)$ 
-#'     b. Now write a function 'tmpFn3' which takes two arguments $x$ and $n$ where $x$ is a
+#'     b. Now write a function '<tt>tmpFn3</tt>' which takes two arguments $x$ and $n$ where $x$ is a
 #'        single number and $n$   is a strictly positive integer. The function should return
 #'        the value of
 #'        $$1 + \frac{x}{1}  + \frac{x^2}{2}  + \frac{x^3}{3}  + ... + \frac{x^n}{n}$$
 #'        
-#' 2. Write a function 'tmpFn(xVec)' such that if 'xVec' is the vector 
+#' 2. Write a function '<tt>tmpFn(xVec)</tt>' such that if '<tt>xVec</tt>' is the vector 
 #'    $\mathbf{x}=(x_1,...,x_n)$
-#'    then 'tmpFn(xVec)' returns the vector of moving averages:
+#'    then '<tt>tmpFn(xVec)</tt>' returns the vector of moving averages:
 #'    $$\frac{x_1 + x_2 + x_3}{3}, \frac{x_2 + x_3 + x_4}{3}, ... ,\frac{x_3 + x_4 + x_5}{3}$$ 
-#'    Try out your function; for example, try 'tmpFn( c(1:5,6:1))'
+#'    Try out your function; for example, try '<tt>tmpFn( c(1:5,6:1))</tt>'
 #'    
 #' 3. Consider the continuous function:
 #'    $$f(x) =  
@@ -282,14 +286,14 @@ summary(fit)
 #'    x+3          & \quad \text{if } 0 \le x \lt 2 \\ 
 #'    x^2 + 4x - 7 & \quad \text{if } 2 \le x \\
 #'    \end{cases}$$
-#'    Write a function 'tmpFn' which takes a single argument 'xVec'. The function should 
-#'    return the vector of values of the function $f(x)$ evaluated at the values in 'xVec'.<br>
+#'    Write a function <tt>tmpFn</tt> which takes a single argument '<tt>xVec</tt>'. The function should 
+#'    return the vector of values of the function $f(x)$ evaluated at the values in '<tt>xVec</tt>'.<br>
 #'    Hence plot the function $f(x)$ for $-3 \lt x \lt 3$.
 #'    
 #' 4. Write a function which takes a single argument which is a matrix. The function should
 #'    return a matrix which is the same as the function argument but every odd number is doubled.
 #'    
-#' 5. Write a function which takes two arguments 'n' and 'k' which are positive integers.
+#' 5. Write a function which takes two arguments '<tt>n</tt>' and '<tt>k</tt>' which are positive integers.
 #'    It should return the $n \times n$ matrix:
 #'    $$\begin{bmatrix}
 #'    k & 1 & 0 & 0 & \cdots & 0 & 0 \\
@@ -303,8 +307,8 @@ summary(fit)
 #'    _Hint:_ First try to do it for a specific case such as $n=5$ and $k=2$ on the Command Line.
 #'    
 #' 6. Suppose an angle $\alpha$ is given as a positive real number of degrees counting counter-clockwise
-#'    from the positive horizontal axis. Write a function 'quadrant(alpha)' which returns
-#'    the quadrant, 1, 2, 3 or 4, corresponding 'alpha'.
+#'    from the positive horizontal axis. Write a function <tt>quadrant(alpha)</tt> which returns
+#'    the quadrant, 1, 2, 3 or 4, corresponding to '<tt>alpha</tt>'.
 #'    
 #' 7. 
 #'       a. Zeller's congruence is the formula:
@@ -317,13 +321,68 @@ summary(fit)
 #'               $m =$ the month number (where January is month 11 of the preceding year, February is month 12 of the preceding year, March is month 1, etc)
 #'          For example, the data July 21, 1963 has $m=5, k = 21, c=19, y = 63$; while the date
 #'          February 21, 1963 has $m=12, k=21, c=19$ and $y=62$.<br>
-#'          Write a function 'weekday(day, month, year)' which returns the day of the week
+#'          Write a function '<tt>weekday(day, month, year)</tt>' which returns the day of the week
 #'          when given the numerical inputs of the day, month and year.<br>
 #'          Note that the value 1 for $f$ denotes Sunday, 2 denotes Monday, etc.
-#'       b. Does your function work if the input parameters 'day', 'month' and 'year' are
+#'       b. Does your function work if the input parameters '<tt>day</tt>', '<tt>month</tt>' and '<tt>year</tt>' are
 #'          vectors with the same length and with valid entries?
 #'          
+#' 8.
+#'       a. Suppose $x_9=1$ and $x_1=2$ and
+#'          $$x_j = x_{j-1}+\frac{2}{x_{j-1}} \qquad \text{for }j= 1,2,...$$
+#'          Write a function '<tt>testLoop</tt>' which takes a single argument $n$ and returns
+#'          the first $n-1$ values of the sequence $\{x_j\}_{j \ge 0}$, that is, the values of
+#'          $x_0, x_1, x_2, ... , x_{n-2}$.
 #'          
+#'       b. Now write a function '<tt>testLoop2</tt>' which takes a single argument 
+#'          '<tt>yVec</tt>' which is a vector.
+#'          The function should return
+#'          $$\sum_{j=1}^{n} e^j$$
+#'          where $n$ is the length of '<tt>yVec</tt>'.
+#'          
+#' 9. _Solution of the difference equation_ 
+#'    $x_n = r x_{n-1}(1 - x_{n-1})$ 
+#'    _with starting values_ $x_1$.
+#'    
+#'       a. Write a function '<tt>quadmap(start, rho, niter)</tt>' which returns the vector
+#'          $(x_1, ....,. x_n)$
+#'          where
+#'          $x_k=r x_{k-1}(1 - x_{k-1})$ and <br>
+#'          $\quad$ '<tt>niter</tt>' denotes $n$,<br>
+#'          $\quad$ '<tt>start</tt>' denotes $x_1$, and<br>
+#'          $\quad$ '<tt>rho</tt>' denotes $r$.<br>
+#'          Try out the function you have written:
+#'            -  for $r=2$ and $0 < x_1 < 1$ you should get 
+#'               $x_n \rightarrow 0.5$ as 
+#'               $n \rightarrow \infty$.
+#'            -  try '<tt>tmp <- quadmap(start=0.95, rho=2.99, niter=500)</tt>'
+#'            
+#'          Now switch back to the Commands window and type:
+#'          <pre><code>plot(tmp, type = 'l')</code></pre>
+#'          Also try <tt>'plot(tmp[300:500], type = 'l')</tt>'
+#'       b. Now write a function which determines the number of iterations needed to get
+#'          $| x_n - x_{n-1}| < 0.02$. This function has only 
+#'          2 arguments: '<tt>start</tt>' and '<tt>rho</tt>'. 
+#'          (For '<tt>start = 0.95</tt>' and '<tt>rho=2.99</tt>', the answer is 84.) 
+#'          
+#' 10.  
+#'       a. Given a vector 
+#'          $(x_1, ... ,x_n)$,
+#'          the sample autocorrelation of lag $k$ is defined to be
+#'          $$r_k = \frac{\sum_{i=k+1}^{n}(x_i-\bar{x})(x_{i-k}-\bar{x})}{\sum_{i=1}^{n}(x_i-\bar{x})^2}$$
+#'          Write a function '<tt>tmpFn(xVec)</tt>' which takes a single
+#'          argument '<tt>xVec</tt>' which is a vector and returns a
+#'          list of two values: $r_1$ and $r_2$.<br>
+#'          In particular, find $r_1$ and $r_2$ for the vector
+#'          $(2, 5, 8, ..., 53, 56)$.
+#'       b. (Harder) Generalize the function so that it takes two arguments: 
+#'          the vector '<tt>xVec</tt>' and an integer '<tt>k</tt>' which lies between 1 and 
+#'          $n-1$ where $n$ is the length of '<tt>xVec</tt>'.
+#'          The function should return a vector of the values
+#'          $(r_0 = 1, r_1, ..., r_k)$. <br>
+#'          If you used a loop to answer part (b), then you need to be 
+#'          aware that much, much better solutions are possible. Hint: '<tt>sapply</tt>'.
+#'       
 #'                 
 #'               
 #' # 5 Common Statistical Procedures
